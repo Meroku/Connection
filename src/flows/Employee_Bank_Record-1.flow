@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <interviewLabel>Employee Bank Record {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Employee Bank Record</label>
+    <processType>Flow</processType>
+    <screens>
+        <name>Account_Information</name>
+        <label>Account Information</label>
+        <locationX>118</locationX>
+        <locationY>150</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Name_on_Account</name>
+            <dataType>String</dataType>
+            <fieldText>Name on Account</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>Account_Type</name>
+            <dataType>String</dataType>
+            <fieldText>Account Type</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>Account_Information</startElementReference>
+</Flow>

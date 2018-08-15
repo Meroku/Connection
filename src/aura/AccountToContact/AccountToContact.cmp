@@ -1,0 +1,32 @@
+<aura:component controller="AccountAndContactController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <h2>New private customer</h2>
+    <aura:attribute name="message" type="String"/>
+    <aura:attribute name="accRecord" type="Account" />
+    <force:recordData aura:id="forceRecord"
+                recordId="{!v.recordId}"
+                targetFields="{!v.accRecord}"
+                fields="Id,Name,Phone, Type_of_bank_account__c"
+                mode="EDIT" />
+    <aura:attribute name="contRecord" type="Contact" />
+    <force:recordData aura:id="forceRecord1"
+                      targetFields="{!v.contRecord}"
+                      fields="AccountId, LastName, Phone"
+                      mode="EDIT" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="picklistValues" type="Object" />
+    <c:PickListForAcc sObjectName="Account" fieldName="Type_of_bank_account__c" picklistValues="{!v.picklistValues}" />
+
+    <lightning:input aura:id="accName" name="accName" 
+                     label="Name" required="true"/>
+    <lightning:input aura:id="accPhone" name="accPhone" 
+                     label="Phone" required="true"/>
+    <lightning:select aura:id="accType" name="accType" label="Type">
+    <aura:iteration items="{!v.picklistValues}" var="item">
+        <option value="{!item}">{!item}</option>
+    </aura:iteration>
+    </lightning:select>
+    <lightning:button variant="brand" label="Save!"
+                      onclick="{!c.saveRecord}"/>
+    <p>{!v.message}</p>
+</aura:component>

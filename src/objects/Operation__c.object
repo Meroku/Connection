@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Operations</relationshipLabel>
+        <relationshipName>Operations</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Bank_account__c</fullName>
+        <externalId>false</externalId>
+        <label>Bank account</label>
+        <referenceTo>Bank_account__c</referenceTo>
+        <relationshipLabel>Operations</relationshipLabel>
+        <relationshipName>Operations</relationshipName>
+        <relationshipOrder>1</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Credit_card__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Credit card</label>
+        <referenceTo>Credit__c</referenceTo>
+        <relationshipLabel>Operations</relationshipLabel>
+        <relationshipName>Operations</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Merchant__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Merchant</label>
+        <referenceTo>Merchant__c</referenceTo>
+        <relationshipLabel>Operations</relationshipLabel>
+        <relationshipName>Operations</relationshipName>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Type_of_operation__c</fullName>
+        <externalId>false</externalId>
+        <label>Type of operation</label>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Перевод</fullName>
+                    <default>false</default>
+                    <label>Перевод</label>
+                </value>
+                <value>
+                    <fullName>Обмен валют</fullName>
+                    <default>false</default>
+                    <label>Обмен валют</label>
+                </value>
+                <value>
+                    <fullName>Кредит</fullName>
+                    <default>false</default>
+                    <label>Кредит</label>
+                </value>
+                <value>
+                    <fullName>Оплата услуг</fullName>
+                    <default>false</default>
+                    <label>Оплата услуг</label>
+                </value>
+                <value>
+                    <fullName>Операция с карточкой(списание/пополнение)</fullName>
+                    <default>false</default>
+                    <label>Операция с карточкой(списание/пополнение)</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Operation</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Operation Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Operations</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Credit_card_rule</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND( Credit_card__c  = null, ISPICKVAL( Type_of_operation__c , &apos;Операция с карточкой(списание/пополнение)&apos;))</errorConditionFormula>
+        <errorMessage>For this type of operation you need credit card!</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>For_credit_cards</fullName>
+        <active>true</active>
+        <errorConditionFormula>Account__r.Name  &lt;&gt;  Bank_account__r.Account__r.Name</errorConditionFormula>
+        <errorMessage>This account do not related to your!</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>For_credit_cards_op</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND( Credit_card__c  &lt;&gt; null,Account__r.Name  &lt;&gt;  Credit_card__r.Account1__r.Name)</errorConditionFormula>
+        <errorMessage>This card not yours!</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>
