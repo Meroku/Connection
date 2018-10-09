@@ -52,18 +52,18 @@
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ReadWrite</externalSharingModel>
     <fields>
         <fullName>Account1__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
         <label>Account</label>
         <referenceTo>Account</referenceTo>
         <relationshipLabel>Credit cards (Account)</relationshipLabel>
         <relationshipName>Credit_cards1</relationshipName>
-        <relationshipOrder>0</relationshipOrder>
-        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <required>false</required>
         <trackTrending>false</trackTrending>
-        <type>MasterDetail</type>
-        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Active__c</fullName>
@@ -72,6 +72,18 @@
         <label>Active</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Balance__c</fullName>
+        <externalId>false</externalId>
+        <formula>Bank_account__r.Money__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
     </fields>
     <fields>
         <fullName>Bank_account__c</fullName>
@@ -86,15 +98,91 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>End_date__c</fullName>
+        <externalId>false</externalId>
+        <label>End date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Number__c</fullName>
         <externalId>false</externalId>
         <label>Number</label>
         <precision>16</precision>
-        <required>true</required>
+        <required>false</required>
         <scale>0</scale>
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Visa</fullName>
+                    <default>false</default>
+                    <label>Visa</label>
+                </value>
+                <value>
+                    <fullName>Master card</fullName>
+                    <default>false</default>
+                    <label>Master card</label>
+                </value>
+                <value>
+                    <fullName>Maestro</fullName>
+                    <default>false</default>
+                    <label>Maestro</label>
+                </value>
+                <value>
+                    <fullName>Visa Electron</fullName>
+                    <default>false</default>
+                    <label>Visa Electron</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Operation__c</fullName>
+        <externalId>false</externalId>
+        <label>Operation</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Visa</fullName>
+                    <default>false</default>
+                    <label>Visa</label>
+                </value>
+                <value>
+                    <fullName>Master card</fullName>
+                    <default>false</default>
+                    <label>Master card</label>
+                </value>
+                <value>
+                    <fullName>Maestro</fullName>
+                    <default>false</default>
+                    <label>Maestro</label>
+                </value>
+                <value>
+                    <fullName>Visa Electron</fullName>
+                    <default>false</default>
+                    <label>Visa Electron</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <label>Credit card</label>
     <listViews>
@@ -108,6 +196,12 @@
     </nameField>
     <pluralLabel>Credit cards</pluralLabel>
     <searchLayouts/>
-    <sharingModel>ControlledByParent</sharingModel>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Not_Less_Than_Zero</fullName>
+        <active>false</active>
+        <errorConditionFormula>Balance__c  &lt;= 0</errorConditionFormula>
+        <errorMessage>Balance can&apos;t be less than zero</errorMessage>
+    </validationRules>
     <visibility>Public</visibility>
 </CustomObject>

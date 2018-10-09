@@ -52,6 +52,7 @@
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
     <fields>
         <fullName>Account__c</fullName>
         <externalId>false</externalId>
@@ -66,6 +67,64 @@
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <fields>
+        <fullName>Blocked__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Blocked</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Credit_month__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( ISPICKVAL( Type_of_bank_account__c , &apos;Кредитовый счет&apos;) , Money__c / 12, 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Credit(month)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Date_of_overdraft_creation__c</fullName>
+        <externalId>false</externalId>
+        <label>Date of overdraft creation</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Day_limit__c</fullName>
+        <externalId>false</externalId>
+        <label>Day limit</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Money__c</fullName>
+        <externalId>false</externalId>
+        <label>Money</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Next_month__c</fullName>
+        <externalId>false</externalId>
+        <formula>DATE(YEAR( DATEVALUE(CreatedDate) ), MONTH( DATEVALUE(CreatedDate) )+1, 1)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Next month</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Number__c</fullName>
         <externalId>false</externalId>
         <label>Number</label>
@@ -75,6 +134,58 @@
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Overdraft__c</fullName>
+        <externalId>false</externalId>
+        <label>Overdraft</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Replenishment_month__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( ISPICKVAL( Type_of_bank_account__c , &apos;Дебитовый счет&apos;) , Account__r.Sum_of_d__c / 12 * 0.02, 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Replenishment(month)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Sum_of_credit__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( ISPICKVAL( Type_of_bank_account__c , &apos;Кредитовый счет&apos;) , Account__r.Sum_of_c__c / 12, 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sum of credit</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Time2__c</fullName>
+        <externalId>false</externalId>
+        <label>Time2</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Time__c</fullName>
+        <externalId>false</externalId>
+        <formula>TIMENOW()</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Time</type>
     </fields>
     <fields>
         <fullName>Type_of_bank_account__c</fullName>
@@ -97,8 +208,24 @@
                     <default>false</default>
                     <label>Кредитовый счет</label>
                 </value>
+                <value>
+                    <fullName>Дебитовый счет(овердрафт)</fullName>
+                    <default>false</default>
+                    <label>Дебитовый счет(овердрафт)</label>
+                </value>
             </valueSetDefinition>
         </valueSet>
+    </fields>
+    <fields>
+        <fullName>local_day_limit__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>local_day_limit</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
     </fields>
     <label>Bank account</label>
     <listViews>
@@ -111,6 +238,42 @@
         <type>Text</type>
     </nameField>
     <pluralLabel>Bank accounts</pluralLabel>
+    <recordTypes>
+        <fullName>Credit</fullName>
+        <active>true</active>
+        <label>Credit</label>
+        <picklistValues>
+            <picklist>Type_of_bank_account__c</picklist>
+            <values>
+                <fullName>Дебитовый счет</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Кредитовый счет</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Debit</fullName>
+        <active>true</active>
+        <label>Debit</label>
+        <picklistValues>
+            <picklist>Type_of_bank_account__c</picklist>
+            <values>
+                <fullName>Дебитовый счет</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Дебитовый счет%28овердрафт%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Кредитовый счет</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
     <searchLayouts/>
     <sharingModel>ControlledByParent</sharingModel>
     <validationRules>
@@ -119,6 +282,28 @@
         <errorConditionFormula>AND( ISPICKVAL( Account__r.Type_of_bank_account__c , &apos;Organization&apos;) ,
   ISPICKVAL( Type_of_bank_account__c , &apos;Дебитовый счет&apos;) )</errorConditionFormula>
         <errorMessage>Only private customers can create &quot;Дебитовый счет&quot;!</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>If_No_Card</fullName>
+        <active>true</active>
+        <errorConditionFormula>$ObjectType.Credit__c.Fields.Bank_account__c  &lt;&gt;  Id
+&amp;&amp;
+ Overdraft__c &lt;&gt; null</errorConditionFormula>
+        <errorDisplayField>Overdraft__c</errorDisplayField>
+        <errorMessage>You can&apos;t use overdraft without credit card</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>If_No_Overdraft</fullName>
+        <active>true</active>
+        <errorConditionFormula>Overdraft__c  = null  &amp;&amp;   Money__c &lt; 0</errorConditionFormula>
+        <errorMessage>It&apos;s can&apos;t be less than zero, without overdraft</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Not_Less_Than</fullName>
+        <active>true</active>
+        <errorConditionFormula>Overdraft__c &lt; -500</errorConditionFormula>
+        <errorDisplayField>Overdraft__c</errorDisplayField>
+        <errorMessage>To much</errorMessage>
     </validationRules>
     <visibility>Public</visibility>
 </CustomObject>

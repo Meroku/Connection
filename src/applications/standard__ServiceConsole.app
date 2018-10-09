@@ -182,6 +182,7 @@
     <tabs>Merchant__c</tabs>
     <tabs>Credit__c</tabs>
     <tabs>Bank_account__c</tabs>
+    <tabs>Overdraft__c</tabs>
     <workspaceConfig>
         <mappings>
             <tab>Bank_account__c</tab>
@@ -197,6 +198,9 @@
         </mappings>
         <mappings>
             <tab>Operation__c</tab>
+        </mappings>
+        <mappings>
+            <tab>Overdraft__c</tab>
         </mappings>
         <mappings>
             <tab>standard-Account</tab>

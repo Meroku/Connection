@@ -79,6 +79,7 @@
     </compactLayouts>
     <enableFeeds>true</enableFeeds>
     <enableHistory>false</enableHistory>
+    <externalSharingModel>ReadWrite</externalSharingModel>
     <fields>
         <fullName>AccountNumber</fullName>
         <trackFeedHistory>false</trackFeedHistory>
@@ -165,6 +166,15 @@
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
     <fields>
+        <fullName>Email_send__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Would you like us to send you email when new operation was created?</description>
+        <externalId>false</externalId>
+        <label>Email send</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Fax</fullName>
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
@@ -241,6 +251,17 @@
         <type>Summary</type>
     </fields>
     <fields>
+        <fullName>Product_Image_Link_c__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( Status_check__c = true,IMAGE(&quot;https://openclipart.org/download/292760/red_flag_3452435.svg&quot; , &quot;Возможно картинку удалили&quot; , 32,32),
+IMAGE(&quot;https://openclipart.org/download/286397/RacingFlag3.svg&quot; , &quot;Возможно картинку удалили&quot; , 32,32))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Bank account status</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Rating</fullName>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Picklist</type>
@@ -311,6 +332,71 @@
     <fields>
         <fullName>Site</fullName>
         <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>Status_check__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Status check</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Sum_of_c__c</fullName>
+        <externalId>false</externalId>
+        <label>Sum of c</label>
+        <summarizedField>Bank_account__c.Money__c</summarizedField>
+        <summaryFilterItems>
+            <field>Bank_account__c.Type_of_bank_account__c</field>
+            <operation>equals</operation>
+            <value>Кредитовый счет</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Bank_account__c.Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Sum_of_d__c</fullName>
+        <externalId>false</externalId>
+        <label>Sum of d</label>
+        <summarizedField>Bank_account__c.Money__c</summarizedField>
+        <summaryFilterItems>
+            <field>Bank_account__c.Type_of_bank_account__c</field>
+            <operation>equals</operation>
+            <value>Дебитовый счет</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Bank_account__c.Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Sum_of_transactions_with_card__c</fullName>
+        <externalId>false</externalId>
+        <label>Sum of transactions with card</label>
+        <summarizedField>Operation__c.Money__c</summarizedField>
+        <summaryFilterItems>
+            <field>Operation__c.Current_Month_2__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </summaryFilterItems>
+        <summaryFilterItems>
+            <field>Operation__c.Type_of_operation__c</field>
+            <operation>equals</operation>
+            <value>Операция с карточкой(списание/пополнение)</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Operation__c.Account__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Test_Roll__c</fullName>
+        <externalId>false</externalId>
+        <label>Test Roll</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Currency</type>
     </fields>
     <fields>
         <fullName>TickerSymbol</fullName>
@@ -384,6 +470,17 @@
     <fields>
         <fullName>YearStarted</fullName>
         <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>d_c__c</fullName>
+        <externalId>false</externalId>
+        <formula>Sum_of_d__c -   Sum_of_c__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>d-c</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Currency</type>
     </fields>
     <listViews>
         <fullName>AllAccounts</fullName>

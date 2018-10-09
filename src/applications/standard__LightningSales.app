@@ -28,5 +28,6 @@
     <tabs>Merchant__c</tabs>
     <tabs>Credit__c</tabs>
     <tabs>Bank_account__c</tabs>
+    <tabs>Overdraft__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>
